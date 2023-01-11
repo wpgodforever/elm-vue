@@ -1,15 +1,26 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import VueRouter from 'vue-router'
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
+const router = new VueRouter({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
+      redirect: '/home',
+      meta: {
+        title: '直接访问'
+      }
+    },
+    {
+      name: 'home',
+      path: '/home',
+      meta: {
+        title: '首页'
+      },
+      component: () => import('../pages/home')//统一采用异步加载路由的方式
+    },
   ]
 })
+
+export default router
