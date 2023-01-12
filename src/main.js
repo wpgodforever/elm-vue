@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import './lib/vant-config'
+// 导入动态设置rem基准值
+import 'amfe-flexible'
 
 Vue.config.productionTip = false
 

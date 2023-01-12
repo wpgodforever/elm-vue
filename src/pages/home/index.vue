@@ -12,3 +12,9 @@ export default {
   name:'home'
 }
 </script>
+
+<style lang="scss" scoped>
+.container{
+  font-size: 16px;
+}
+</style>
