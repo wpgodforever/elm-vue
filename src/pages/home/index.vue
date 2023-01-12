@@ -86,10 +86,10 @@ export default {
       display: flex;
       flex-direction: column;
       width: 25%;
-      height: 110px;
+      height: 220px;
       &--img{
         width: 100%;
-        height: 90px;
+        height: 180px;
         border-radius: 50%;
         overflow: hidden;
         background-color: pink;
