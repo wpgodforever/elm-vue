@@ -12,6 +12,7 @@ const router = new VueRouter({
         title: '直接访问'
       }
     },
+    // 商品选择页
     {
       name: 'home',
       path: '/home',
