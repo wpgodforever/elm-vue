@@ -81,6 +81,7 @@ export default {
   .swip-container{
     display: flex;
     flex-wrap: wrap;
+    border-bottom: 1px solid #e4e4e4;
     &-item{
       display: flex;
       flex-direction: column;
