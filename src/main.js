@@ -7,6 +7,11 @@ import './lib/vant-config'
 // 导入动态设置rem基准值
 import 'amfe-flexible'
 
+// 全局组件
+import myNav from '@/components/common/nav.vue'
+
+Vue.component('myNav', myNav)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

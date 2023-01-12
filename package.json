@@ -12,6 +12,8 @@
   "dependencies": {
     "@vant/touch-emulator": "^1.4.0",
     "amfe-flexible": "^2.2.1",
+    "postcss-px2rem-exclude": "0.0.6",
+    "px2rem-loader": "^0.1.9",
     "vant": "^2.12.53",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
@@ -42,6 +44,7 @@
     "postcss": "^8.4.21",
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
+    "postcss-px-to-viewport": "^1.1.1",
     "postcss-pxtorem": "^6.0.0",
     "postcss-url": "^7.2.1",
     "rimraf": "^2.6.0",
