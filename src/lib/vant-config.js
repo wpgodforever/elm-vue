@@ -34,7 +34,9 @@ import {
   DatetimePicker,
   Loading,
   Notify,
-  NavBar ,
+  NavBar,
+  Swipe,
+  SwipeItem,
 } from 'vant'
 
 const components = [
@@ -69,7 +71,9 @@ const components = [
   DatetimePicker,
   Loading,
   Notify,
-  NavBar
+  NavBar,
+  Swipe,
+  SwipeItem
 ]
 
 components.forEach(compoent => {
