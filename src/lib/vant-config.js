@@ -37,6 +37,9 @@ import {
   NavBar,
   Swipe,
   SwipeItem,
+  Rate,
+  Tabbar,
+  TabbarItem ,
 } from 'vant'
 
 const components = [
@@ -73,7 +76,10 @@ const components = [
   Notify,
   NavBar,
   Swipe,
-  SwipeItem
+  SwipeItem,
+  Rate,
+  Tabbar,
+  TabbarItem ,
 ]
 
 components.forEach(compoent => {

@@ -14,14 +14,52 @@
         </div>
       </van-swipe-item>
     </van-swipe>
+    <!-- 店铺列表区域 -->
+    <div class="shopList flex-col">
+      <div class="shopList-head flex-align">
+        <van-icon name="shop-o" style="margin-right: 5px;"/>
+        附近商家
+      </div>
+      <div class="shopList-item" v-for="(item, index) in 10" :key="index">
+        <div class="shopList-item-img"></div>
+        <div class="shopList-item-middle flex-col">
+          <div class="shopList-item-middle_title flex-align">
+            <div class="brand">品牌</div>
+            <div class="title">效果演示</div>
+          </div>
+          <van-rate
+            v-model="starNum"
+            :size="10"
+            allow-half
+            readonly
+            color="#ffd21e"
+            void-icon="star"
+            void-color="#eee"
+          />
+          <div class="shopList-item-middle_pay">
+            ￥20起送/配送费约￥20
+          </div>
+        </div>
+        <div class="shopList-item-right flex-col">
+          <div class="shopList-item-right_tip">
+            快 准 狠
+          </div>
+          <div class="shopList-item-right_rate">
+            4.7
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import tabbar from '@/components/common/tabbar.vue'
 export default {
   name:'home',
   data(){
     return {
+      starNum:2.5,
       foodTypeList:{
         0:[
           {
@@ -70,7 +108,10 @@ export default {
     },
     onClickRight(){
       console.log('右边被点击')
-    }
+    },
+  },
+  components:{
+    tabbar
   }
 }
 </script>
@@ -82,6 +123,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     border-bottom: 1px solid #e4e4e4;
+    background-color: #fff;
     &-item{
       display: flex;
       flex-direction: column;
@@ -96,6 +138,56 @@ export default {
       }
       &--text{
         text-align: center;
+      }
+    }
+  }
+  .shopList{
+    margin-top: 20px;
+    background-color: #fff;
+    &-head{
+      color: #999;
+      padding: 20px;
+      font-size: 28px;
+    }
+    &-item{
+      display: flex;
+      border-bottom: 1px solid #f1f1f1;
+      padding: 20px 10px;
+      &-img{
+        width: 130px;
+        height: 130px;
+        background-color: pink;
+        margin-right: 20px;
+      }
+      &-middle{
+        &_title{
+          font-weight: bold;
+          margin-bottom: 10px;
+          .brand{
+            background-color: #ffd930;
+            font-size: 12px;
+            padding: 0 5px;
+            margin-right: 10px;
+          }
+          .title{
+            font-size: 30px;
+          }
+        }
+        &_pay{
+          margin-top: auto;
+        }
+      }
+      &-right{
+        margin-left: auto;
+        &_tip{
+          color: #999;
+        }
+        &_rate{
+          color: $themeColor;
+          margin-top: auto;
+          font-size: 40px;
+          margin-left: auto;
+        }
       }
     }
   }
