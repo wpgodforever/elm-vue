@@ -13,6 +13,9 @@
       <van-icon color="#fff" :name="leftIcon" size="20" />
     </template>
     </van-nav-bar>
+    <div class="title-click-box" @click="onClickTitle">
+
+    </div>
   </div>
 </template>
 
@@ -25,6 +28,9 @@ export default {
     },
     onClickRight(){
       this.$emit('onClickRight')
+    },
+    onClickTitle(){
+      this.$emit('onClickTitle')
     }
   }
 }
@@ -39,6 +45,15 @@ export default {
   /deep/ .van-nav-bar__title{
     color: white;
   }
+}
+.title-click-box{
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 500px;
+  height: 92px;
+  transform: translate(-50%,0);
+  z-index: 9999;
 }
 
 </style>
