@@ -55,6 +55,7 @@
 
 <script>
 import tabbar from '@/components/common/tabbar.vue'
+import { getCurrentCity } from '@/api/address/address.js'
 export default {
   name:'home',
   data(){
@@ -109,6 +110,16 @@ export default {
     onClickRight(){
       console.log('右边被点击')
     },
+    test(){
+      getCurrentCity({type:'guess'}).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  },
+  created(){
+    this.test()
   },
   components:{
     tabbar
