@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!-- 顶部导航栏 -->
-    <myNav :title="addressInfo.name || '请点击获取地址'" :rightIcon="'manager-o'" :leftIcon="'search'"  @onClickLeft="onClickLeft" @onClickRight="onClickRight"></myNav>
+    <myNav @onClickTitle="onClickTitle" :title="addressInfo.name || '请点击获取地址'" :rightIcon="'manager-o'" :leftIcon="'search'"  @onClickLeft="onClickLeft" @onClickRight="onClickRight"></myNav>
     <!-- 轮播选择区域 -->
     <van-swipe indicator-color="#2f97ec" class="my-swipe" :autoplay="5000">
       <van-swipe-item v-for="(item,index) in foodTypeList" :key="index">
@@ -112,6 +112,9 @@ export default {
     onClickRight(){
       console.log('右边被点击')
     },
+    onClickTitle(){
+      console.log('标题')
+    }
   },
   created(){
     this.getCurrentCityAction()
