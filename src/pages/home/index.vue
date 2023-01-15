@@ -50,11 +50,13 @@
         </div>
       </div>
     </div>
+    <adressSelectPop :show.sync="show"></adressSelectPop>
   </div>
 </template>
 
 <script>
 import tabbar from '@/components/common/tabbar.vue'
+import adressSelectPop from '@/components/common/adressSelectPop.vue'
 import { mapActions, mapState } from 'vuex'
 
 export default {
@@ -62,6 +64,7 @@ export default {
   data(){
     return {
       starNum:2.5,
+      show:false,
       foodTypeList:{
         0:[
           {
@@ -105,7 +108,7 @@ export default {
     }
   },
   methods:{
-    ...mapActions('address', ['getCurrentCityAction']),
+    ...mapActions('address', ['getCurrentCityAction', 'getHotCityAction', 'getAllCityAction']),
     onClickLeft(){
       console.log('左边被点击')
     },
@@ -113,17 +116,20 @@ export default {
       console.log('右边被点击')
     },
     onClickTitle(){
-      console.log('标题')
+      this.show = true
     }
   },
   created(){
     this.getCurrentCityAction()
+    this.getHotCityAction()
+    this.getAllCityAction()
   },
   computed:{
     ...mapState('address', ['addressInfo'])
   },
   components:{
-    tabbar
+    tabbar,
+    adressSelectPop,
   }
 }
 </script>

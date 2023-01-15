@@ -39,7 +39,12 @@ import {
   SwipeItem,
   Rate,
   Tabbar,
-  TabbarItem ,
+  TabbarItem,
+  CellGroup,
+  Grid,
+  GridItem,
+  IndexBar,
+  IndexAnchor,
 } from 'vant'
 
 const components = [
@@ -79,7 +84,12 @@ const components = [
   SwipeItem,
   Rate,
   Tabbar,
-  TabbarItem ,
+  TabbarItem,
+  CellGroup,
+  Grid,
+  GridItem,
+  IndexBar,
+  IndexAnchor,
 ]
 
 components.forEach(compoent => {
