@@ -53,7 +53,7 @@ export default {
   width: 500px;
   height: 92px;
   transform: translate(-50%,0);
-  z-index: 9999;
+  z-index: 99;
 }
 
 </style>
