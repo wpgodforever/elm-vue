@@ -12,7 +12,17 @@ const getCurrentCity = (data) => {
   })
 }
 
+// 获取搜索地址
+const getSearchCity = (data) => {
+  return request({
+    url: `/v1/pois`,
+    method: 'get',
+    params: data
+  })
+}
+
 export {
   SUCCESS_CODE,
   getCurrentCity,
+  getSearchCity,
 }
