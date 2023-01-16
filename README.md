@@ -1,5 +1,5 @@
-#新手指南
-clone完项目后，进入项目文件最外层目录，打开git bash，输入npm install 下载完依赖后，npm run dev启动项目
+# 新手指南
+## clone完项目后，进入项目文件最外层目录，打开git bash，输入npm install 下载完依赖后，npm run dev启动项目
 
 # **此项目借鉴的是https://github.com/bailicangdu/vue2-elm这个项目，感谢大佬**
 
