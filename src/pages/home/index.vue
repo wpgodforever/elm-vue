@@ -109,6 +109,7 @@ export default {
   },
   methods:{
     ...mapActions('address', ['getCurrentCityAction', 'getHotCityAction', 'getAllCityAction', 'getDetailCity']),
+    ...mapActions('login', ['getUserInfoAction']),
     onClickLeft(){
       console.log('左边被点击')
     },

@@ -57,6 +57,7 @@
 
 <script>
 import { getCode, login } from '@/api/login'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'login',
@@ -74,6 +75,7 @@ export default {
     this.getCodeInfo()
   },
   methods:{
+    ...mapMutations('login', ['setUserInfo']),
     onClickLeft(){
       this.$router.back(-1)
     },
@@ -83,7 +85,7 @@ export default {
         if(res.message){
           return this.$toast.fail(res.message);
         }
-        this.$store.commit('setUserInfo',res)
+        this.setUserInfo(res)
         this.$router.push({
           path: '/'
         })

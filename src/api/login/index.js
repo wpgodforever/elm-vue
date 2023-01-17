@@ -18,8 +18,18 @@ const login = (data) => {
   })
 }
 
+// 根据user_id获取用户信息
+const getUserInfo = (data) => {
+  return request({
+    url: `/v1/user`,
+    method: 'get',
+    params: data
+  })
+}
+
 
 export {
   getCode,
   login,
+  getUserInfo,
 }

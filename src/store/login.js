@@ -1,7 +1,7 @@
-import {  login } from '@/api/login'
+import {  login, getUserInfo } from '@/api/login'
 
 
-const address = {
+const loginModule = {
   namespaced: true,//开启模块化命名空间，要不然无法模块化
   state: {
     userInfo:{
@@ -15,18 +15,20 @@ const address = {
   mutations: {
     setUserInfo: (state, val) => {
       state.userInfo = val
-      window.localStorage('elm-vue-userId',val.user_id)
+      window.localStorage.setItem('elm-vue-userId',val.user_id)
     },
   },
 
   actions: {
-    getCurrentCityAction({ commit, dispatch }, channelId) {
-      return getCurrentCity({type:'guess'})
+    getUserInfoAction({ commit, dispatch }, channelId) {
+      return getUserInfo({
+        user_id: localStorage.getItem('elm-vue-userId')
+      })
         .then( res => {
-          commit('setCurrentCity', res)
+          commit('setUserInfo', res)
         })
     },
   },
 }
 
-export default login
+export default loginModule
