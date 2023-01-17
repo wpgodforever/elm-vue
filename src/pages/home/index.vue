@@ -113,7 +113,9 @@ export default {
       console.log('左边被点击')
     },
     onClickRight(){
-      console.log('右边被点击')
+      this.$router.push({
+        path: '/login'
+      })
     },
     onClickTitle(){
       this.show = true
