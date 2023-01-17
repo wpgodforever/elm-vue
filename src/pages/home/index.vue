@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!-- 顶部导航栏 -->
-    <myNav @onClickTitle="onClickTitle" :title="addressInfo.name || '请点击获取地址'" :rightIcon="'manager-o'" :leftIcon="'search'"  @onClickLeft="onClickLeft" @onClickRight="onClickRight"></myNav>
+    <myNav @onClickTitle="onClickTitle" :title="currentCity || '请点击获取地址'" :rightIcon="'manager-o'" :leftIcon="'search'"  @onClickLeft="onClickLeft" @onClickRight="onClickRight"></myNav>
     <!-- 轮播选择区域 -->
     <van-swipe indicator-color="#2f97ec" class="my-swipe" :autoplay="5000">
       <van-swipe-item v-for="(item,index) in foodTypeList" :key="index">
@@ -57,7 +57,7 @@
 <script>
 import tabbar from '@/components/common/tabbar.vue'
 import adressSelectPop from '@/components/common/adressSelectPop.vue'
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
   name:'home',
@@ -108,7 +108,7 @@ export default {
     }
   },
   methods:{
-    ...mapActions('address', ['getCurrentCityAction', 'getHotCityAction', 'getAllCityAction']),
+    ...mapActions('address', ['getCurrentCityAction', 'getHotCityAction', 'getAllCityAction', 'getDetailCity']),
     onClickLeft(){
       console.log('左边被点击')
     },
@@ -119,13 +119,21 @@ export default {
       this.show = true
     }
   },
-  created(){
-    this.getCurrentCityAction()
+  async created(){
     this.getHotCityAction()
     this.getAllCityAction()
+    // 刚进来需要获取详细地址
+    if(!this.currentCity){
+      // 先获取当前城市
+      await this.getCurrentCityAction()
+      // 在用当前城市坐标请求具体地址
+      this.getDetailCity()
+    }
+
   },
   computed:{
-    ...mapState('address', ['addressInfo'])
+    ...mapState('address', ['addressInfo']),
+    ...mapGetters('address', ['currentCity'])
   },
   components:{
     tabbar,
