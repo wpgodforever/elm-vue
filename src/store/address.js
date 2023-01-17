@@ -1,4 +1,4 @@
-import { SUCCESS_CODE, getCurrentCity } from '@/api/address/index.js'
+import { SUCCESS_CODE, getCurrentCity, getLocation } from '@/api/address/index.js'
 
 
 const address = {
@@ -11,12 +11,17 @@ const address = {
   },
 
   getters: {
-    currentCity: state => state.currentCity,
+    currentCity: state => state.addressInfo.name,
   },
 
   mutations: {
     setCurrentCity: (state, val) => {
-      state.addressInfo = val
+      // 不可以直接const newObj1 = Object.assign(state.addressInfo,val)
+      // 监听对象时候，若对象的引导地址未改变，那么computed将不会检测到。
+      // 比如object中的某个key对应的value变化了，computed检测不出来。
+      const newObj1 = Object.assign({},state.addressInfo)
+      const newObj2 = Object.assign(newObj1,val)
+      state.addressInfo = newObj2
     },
     setHotCitys: (state, val) => {
       state.hotCitys = val
@@ -29,6 +34,13 @@ const address = {
   actions: {
     getCurrentCityAction({ commit, dispatch }, channelId) {
       return getCurrentCity({type:'guess'})
+        .then( res => {
+          commit('setCurrentCity', res)
+        })
+    },
+    getDetailCity({ commit, dispatch, state }, channelId) {
+      console.log(state.addressInfo,'this.state.addressInfo')
+      return getLocation(state.addressInfo.latitude + ',' + state.addressInfo.longitude)
         .then( res => {
           commit('setCurrentCity', res)
         })

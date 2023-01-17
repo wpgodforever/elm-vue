@@ -21,8 +21,17 @@ const getSearchCity = (data) => {
   })
 }
 
+// 跟进坐标获取地址
+const getLocation = (data) => {
+  return request({
+    url: `/v2/pois/${data}`,
+    method: 'get',
+  })
+}
+
 export {
   SUCCESS_CODE,
   getCurrentCity,
   getSearchCity,
+  getLocation,
 }

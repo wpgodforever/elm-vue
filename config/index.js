@@ -19,6 +19,11 @@ module.exports = {
           // '^/api': '/',
         },
       },
+      '/v2': {
+        target: `http://cangdu.org:8001`,
+        changeOrigin: true,
+        secure:false,
+      },
     },
 
     // Various Dev Server settings
