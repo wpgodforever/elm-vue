@@ -109,11 +109,14 @@ export default {
   },
   methods:{
     ...mapActions('address', ['getCurrentCityAction', 'getHotCityAction', 'getAllCityAction', 'getDetailCity']),
+    ...mapActions('login', ['getUserInfoAction']),
     onClickLeft(){
       console.log('左边被点击')
     },
     onClickRight(){
-      console.log('右边被点击')
+      this.$router.push({
+        path: '/login'
+      })
     },
     onClickTitle(){
       this.show = true
