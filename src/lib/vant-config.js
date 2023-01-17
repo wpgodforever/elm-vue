@@ -45,6 +45,7 @@ import {
   GridItem,
   IndexBar,
   IndexAnchor,
+  NoticeBar,
 } from 'vant'
 
 const components = [
@@ -90,6 +91,7 @@ const components = [
   GridItem,
   IndexBar,
   IndexAnchor,
+  NoticeBar,
 ]
 
 components.forEach(compoent => {
