@@ -97,7 +97,7 @@ export default {
       })
     },
     toReset(){
-      this.$router.push({
+      this.$router.replace({
         path: '/reset'
       })
     }
