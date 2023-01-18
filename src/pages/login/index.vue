@@ -49,7 +49,7 @@
         <van-button round block type="info" native-type="submit">提交</van-button>
       </div>
       <div style="margin: 16px;">
-        <van-button round block @click="toReset">修改密码</van-button>
+        <van-button round block @click.prevent="toReset">修改密码</van-button>
       </div>
     </van-form>
   </div>

@@ -39,7 +39,6 @@ const address = {
         })
     },
     getDetailCity({ commit, dispatch, state }, channelId) {
-      console.log(state.addressInfo,'this.state.addressInfo')
       return getLocation(state.addressInfo.latitude + ',' + state.addressInfo.longitude)
         .then( res => {
           commit('setCurrentCity', res)

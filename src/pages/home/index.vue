@@ -3,17 +3,23 @@
     <!-- 顶部导航栏 -->
     <myNav @onClickTitle="onClickTitle" :title="currentCity || '请点击获取地址'" :rightIcon="'manager-o'" :leftIcon="'search'"  @onClickLeft="onClickLeft" @onClickRight="onClickRight"></myNav>
     <!-- 轮播选择区域 -->
-    <van-swipe indicator-color="#2f97ec" class="my-swipe" :autoplay="5000">
-      <van-swipe-item v-for="(item,index) in foodTypeList" :key="index">
-        <div class="swip-container">
-          <div class="swip-container-item" v-for="(swipItem,swipIndex) in foodTypeList[index]" :key="swipIndex">
-            <div class="swip-container-item--img"></div>
-            <div class="swip-container-item--text">{{ swipItem.title }}</div>
-
+    <div class="swip-box bg">
+      <van-loading type="spinner" v-if="loading"/>
+      <van-swipe v-else indicator-color="#2f97ec" class="my-swipe" :autoplay="5000">
+        <van-swipe-item v-for="(item,index) in foodTypeList" :key="index">
+          <div class="swip-container">
+            <div class="swip-container-item" v-for="(swipItem,swipIndex) in foodTypeList[index]" :key="swipIndex">
+              <div class="swip-container-item--img">
+                <img class="imgClass" :src="imgBaseUrl + swipItem.image_url" alt="" srcset="">
+              </div>
+              <div class="swip-container-item--text">{{ swipItem.title }}</div>
+            </div>
           </div>
-        </div>
-      </van-swipe-item>
-    </van-swipe>
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+
+
     <!-- 店铺列表区域 -->
     <div class="shopList flex-col">
       <div class="shopList-head flex-align">
@@ -58,6 +64,7 @@
 import tabbar from '@/components/common/tabbar.vue'
 import adressSelectPop from '@/components/common/adressSelectPop.vue'
 import { mapActions, mapGetters, mapState } from 'vuex'
+import { getFoodtype } from '@/api/home'
 
 export default {
   name:'home',
@@ -65,46 +72,11 @@ export default {
     return {
       starNum:2.5,
       show:false,
+      imgBaseUrl: 'https://fuss10.elemecdn.com', //图片域名地址
       foodTypeList:{
-        0:[
-          {
-            title:'甜品'
-          },{
-            title:'甜品'
-          },{
-            title:'甜品'
-          },{
-            title:'甜品'
-          },{
-            title:'甜品'
-          },{
-            title:'甜品'
-          },{
-            title:'甜品'
-          },{
-            title:'甜品'
-          },
-        ],
-        1:[
-          {
-            title:'饮料'
-          },{
-            title:'饮料'
-          },{
-            title:'饮料'
-          },{
-            title:'饮料'
-          },{
-            title:'饮料'
-          },{
-            title:'饮料'
-          },{
-            title:'饮料'
-          },{
-            title:'饮料'
-          },
-        ],
-      }
+        0:[]
+      },
+      loading:true
     }
   },
   methods:{
@@ -127,9 +99,23 @@ export default {
     },
     onClickTitle(){
       this.show = true
+    },
+    getFoodtype(geohash){
+      getFoodtype({
+        geohash,
+        group_type: '1',
+	      'flags[]': 'F'
+      }).then(res => {
+        let resLength = res.length;
+       	let resArr = [...res]; // 返回一个新的数组
+    		for (let i = 0, j = 0; i < resLength; i += 8, j++) {
+          this.$set(this.foodTypeList,j,resArr.splice(0, 8))
+    		}
+        this.loading = false
+      })
     }
   },
-  async created(){
+  async mounted(){
     this.getHotCityAction()
     this.getAllCityAction()
     // 刚进来需要获取详细地址
@@ -138,6 +124,8 @@ export default {
       await this.getCurrentCityAction()
       // 在用当前城市坐标请求具体地址
       this.getDetailCity()
+      // 在用当前城市坐标请求导航食品类型列表
+      this.getFoodtype(this.addressInfo.latitude + ',' + this.addressInfo.longitude)
     }
 
   },
@@ -170,7 +158,10 @@ export default {
         height: 180px;
         border-radius: 50%;
         overflow: hidden;
-        background-color: pink;
+        .imgClass{
+          width: 100%;
+          height: 180px;
+        }
       }
       &--text{
         text-align: center;
@@ -227,6 +218,16 @@ export default {
       }
     }
   }
+}
+.swip-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 440px;
+  width: 100%;
+}
+.bg{
+  background-color: #fff;
 }
 .van-nav-bar {
   background-color: #2f97ec;
