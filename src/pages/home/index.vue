@@ -98,6 +98,13 @@ export default {
 
     },
     onClickTitle(){
+      if(!this.hotCitys.length){
+        this.getHotCityAction()
+      }
+      if(!this.allCitys.length){
+        this.getAllCityAction()
+      }
+
       this.show = true
     },
     getFoodtype(geohash){
@@ -116,21 +123,18 @@ export default {
     }
   },
   async mounted(){
-    this.getHotCityAction()
-    this.getAllCityAction()
     // 刚进来需要获取详细地址
     if(!this.currentCity){
       // 先获取当前城市
       await this.getCurrentCityAction()
       // 在用当前城市坐标请求具体地址
       this.getDetailCity()
-      // 在用当前城市坐标请求导航食品类型列表
-      this.getFoodtype(this.addressInfo.latitude + ',' + this.addressInfo.longitude)
     }
-
+    // 在用当前城市坐标请求导航食品类型列表
+    this.getFoodtype(this.addressInfo.latitude + ',' + this.addressInfo.longitude)
   },
   computed:{
-    ...mapState('address', ['addressInfo']),
+    ...mapState('address', ['addressInfo','hotCitys','allCitys']),
     ...mapGetters('address', ['currentCity'])
   },
   components:{
