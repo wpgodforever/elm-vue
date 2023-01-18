@@ -46,6 +46,7 @@ import {
   IndexBar,
   IndexAnchor,
   NoticeBar,
+  Skeleton,
 } from 'vant'
 
 const components = [
@@ -92,6 +93,7 @@ const components = [
   IndexBar,
   IndexAnchor,
   NoticeBar,
+  Skeleton,
 ]
 
 components.forEach(compoent => {
