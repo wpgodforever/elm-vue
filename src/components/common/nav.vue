@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="navContainer">
     <van-nav-bar
       :title="title"
       @click-left="onClickLeft"
@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container{
+.navContainer{
   font-size: 16px;
 }
 .van-nav-bar {
