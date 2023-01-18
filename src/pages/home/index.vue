@@ -114,9 +114,16 @@ export default {
       console.log('左边被点击')
     },
     onClickRight(){
-      this.$router.push({
-        path: '/login'
-      })
+      if(localStorage.getItem('elm-vue-userId')){
+        this.$router.push({
+          path: '/tabbar/mine'
+        })
+      }else{
+        this.$router.push({
+          path: '/login'
+        })
+      }
+
     },
     onClickTitle(){
       this.show = true
