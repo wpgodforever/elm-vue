@@ -21,7 +21,7 @@ const router = new VueRouter({
       }
     },
     tabbar,
-    login,
+    ...login,
   ]
 })
 
