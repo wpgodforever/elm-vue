@@ -29,6 +29,29 @@ export default {
       })
     }
   },
+  watch:{
+    $route: {
+      handler: function(val, oldVal) {
+        console.log(val,'val')
+        switch (val.name){
+          case 'home':
+            this.tabbarIndex = 0
+            break
+            case 'search':
+            this.tabbarIndex = 1
+            break
+            case 'order':
+            this.tabbarIndex = 2
+            break
+            case 'mine':
+            this.tabbarIndex = 3
+            break
+        }
+      },
+      immediate: true,
+       deep:true
+    }
+  },
 }
 </script>
 
