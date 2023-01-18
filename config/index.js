@@ -24,6 +24,16 @@ module.exports = {
         changeOrigin: true,
         secure:false,
       },
+      '/shopping': {
+        target: `http://cangdu.org:8001`,
+        changeOrigin: true,
+        secure:false,
+      },
+      '/img': {
+        target: `http://cangdu.org:8001`,
+        changeOrigin: true,
+        secure:false,
+      },
     },
 
     // Various Dev Server settings

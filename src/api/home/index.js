@@ -8,7 +8,16 @@ const getFoodtype = (data) => {
     params: data
   })
 }
+// 获取店铺列表
+const getrestaurantsList = (data) => {
+  return request({
+    url: `/shopping/restaurants`,
+    method: 'get',
+    params: data
+  })
+}
 
 export {
   getFoodtype,
+  getrestaurantsList,
 }

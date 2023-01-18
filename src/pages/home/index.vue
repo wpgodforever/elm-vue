@@ -10,7 +10,7 @@
           <div class="swip-container">
             <div class="swip-container-item" v-for="(swipItem,swipIndex) in foodTypeList[index]" :key="swipIndex">
               <div class="swip-container-item--img">
-                <img class="imgClass" :src="imgBaseUrl + swipItem.image_url" alt="" srcset="">
+                <img class="imgClass" :src="navImgBaseUrl + swipItem.image_url" alt="" srcset="">
               </div>
               <div class="swip-container-item--text">{{ swipItem.title }}</div>
             </div>
@@ -26,15 +26,17 @@
         <van-icon name="shop-o" style="margin-right: 5px;"/>
         附近商家
       </div>
-      <div class="shopList-item" v-for="(item, index) in 10" :key="index">
-        <div class="shopList-item-img"></div>
+      <div class="shopList-item" v-for="(item, index) in shopList" :key="index">
+        <div class="shopList-item-img">
+          <img :src="imgBaseUrl + item.image_path" class="shop_img">
+        </div>
         <div class="shopList-item-middle flex-col">
           <div class="shopList-item-middle_title flex-align">
             <div class="brand">品牌</div>
-            <div class="title">效果演示</div>
+            <div class="title">{{ item.name }}</div>
           </div>
           <van-rate
-            v-model="starNum"
+            v-model="item.rating"
             :size="10"
             allow-half
             readonly
@@ -43,7 +45,7 @@
             void-color="#eee"
           />
           <div class="shopList-item-middle_pay">
-            ￥20起送/配送费约￥20
+            ￥{{item.float_minimum_order_amount}}起送/{{ item.piecewise_agent_fee.tips }}
           </div>
         </div>
         <div class="shopList-item-right flex-col">
@@ -51,7 +53,7 @@
             快 准 狠
           </div>
           <div class="shopList-item-right_rate">
-            4.7
+            {{ item.rating }}
           </div>
         </div>
       </div>
@@ -64,7 +66,8 @@
 import tabbar from '@/components/common/tabbar.vue'
 import adressSelectPop from '@/components/common/adressSelectPop.vue'
 import { mapActions, mapGetters, mapState } from 'vuex'
-import { getFoodtype } from '@/api/home'
+import { getFoodtype, getrestaurantsList } from '@/api/home'
+import { imgBaseUrl } from '@/lib/env'
 
 export default {
   name:'home',
@@ -72,11 +75,13 @@ export default {
     return {
       starNum:2.5,
       show:false,
-      imgBaseUrl: 'https://fuss10.elemecdn.com', //图片域名地址
+      navImgBaseUrl: 'https://fuss10.elemecdn.com', //图片域名地址
       foodTypeList:{
         0:[]
       },
-      loading:true
+      shopList:[],
+      loading:true,
+      imgBaseUrl
     }
   },
   methods:{
@@ -98,6 +103,13 @@ export default {
 
     },
     onClickTitle(){
+      if(!this.hotCitys.length){
+        this.getHotCityAction()
+      }
+      if(!this.allCitys.length){
+        this.getAllCityAction()
+      }
+
       this.show = true
     },
     getFoodtype(geohash){
@@ -113,24 +125,32 @@ export default {
     		}
         this.loading = false
       })
+    },
+    getrestaurantsList(){
+      getrestaurantsList({
+        offset:0,
+        limit:20,
+        latitude:this.addressInfo.latitude,
+        longitude:this.addressInfo.longitude,
+      }).then(res => {
+        this.shopList = res
+      })
     }
   },
   async mounted(){
-    this.getHotCityAction()
-    this.getAllCityAction()
     // 刚进来需要获取详细地址
     if(!this.currentCity){
       // 先获取当前城市
       await this.getCurrentCityAction()
       // 在用当前城市坐标请求具体地址
       this.getDetailCity()
-      // 在用当前城市坐标请求导航食品类型列表
-      this.getFoodtype(this.addressInfo.latitude + ',' + this.addressInfo.longitude)
     }
-
+    // 在用当前城市坐标请求导航食品类型列表
+    this.getFoodtype(this.addressInfo.latitude + ',' + this.addressInfo.longitude)
+    this.getrestaurantsList()
   },
   computed:{
-    ...mapState('address', ['addressInfo']),
+    ...mapState('address', ['addressInfo','hotCitys','allCitys']),
     ...mapGetters('address', ['currentCity'])
   },
   components:{
@@ -143,6 +163,7 @@ export default {
 <style lang="scss" scoped>
 .container{
   font-size: 16px;
+  padding-bottom: 95px;
   .swip-container{
     display: flex;
     flex-wrap: wrap;
@@ -183,7 +204,6 @@ export default {
       &-img{
         width: 130px;
         height: 130px;
-        background-color: pink;
         margin-right: 20px;
       }
       &-middle{

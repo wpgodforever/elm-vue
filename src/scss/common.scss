@@ -11,6 +11,10 @@ $themeColor: #2f97ec;
   display: flex;
   align-items: center;
 }
+img{
+  width: 100%;
+  height: 100%;
+}
 
 // 全局隐藏滚动条
 html,body{ width: 100%; height: 100%; overflow: scroll;}
