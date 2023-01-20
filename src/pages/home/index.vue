@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!-- 顶部导航栏 -->
-    <myNav @onClickTitle="onClickTitle" :title="currentCity || '请点击获取地址'" :rightIcon="'manager-o'" :leftIcon="'search'"  @onClickLeft="onClickLeft" @onClickRight="onClickRight"></myNav>
+    <myNav fixed @onClickTitle="onClickTitle" :title="currentCity || '请点击获取地址'" :rightIcon="'manager-o'" :leftIcon="'search'"  @onClickLeft="onClickLeft" @onClickRight="onClickRight"></myNav>
     <!-- 轮播选择区域 -->
     <div class="swip-box bg">
       <van-loading type="spinner" v-if="loading"/>
@@ -245,6 +245,7 @@ export default {
   justify-content: center;
   height: 440px;
   width: 100%;
+  margin-top: 100px;
 }
 .bg{
   background-color: #fff;
