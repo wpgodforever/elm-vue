@@ -14,7 +14,7 @@
     <div class="container-list flex-col">
       <div class="item" v-for="(item,index) in list" :key="index">
         <div class="item-img">
-          <img :src="imgBaseUrl + item.image_path" class="shop_img"></img>
+          <img :src="imgBaseUrl + item.image_path" class="shop_img"/>
         </div>
         <div class="item-right flex-col">
           <div class="item-right-title">{{ item.name }}</div>
@@ -74,6 +74,7 @@ export default {
 .container-list{
   margin-top: 100px;
   font-size: 36px;
+  margin-bottom: 100px;
   .item{
     display: flex;
     padding: 20px;

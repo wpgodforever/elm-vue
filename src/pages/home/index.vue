@@ -85,8 +85,7 @@ export default {
     }
   },
   methods:{
-    ...mapActions('address', ['getCurrentCityAction', 'getHotCityAction', 'getAllCityAction', 'getDetailCity']),
-    ...mapActions('login', ['getUserInfoAction']),
+    ...mapActions('address', [ 'getHotCityAction', 'getAllCityAction',]),
     onClickLeft(){
       console.log('左边被点击')
     },
@@ -137,17 +136,22 @@ export default {
       })
     }
   },
-  async mounted(){
-    // 刚进来需要获取详细地址
-    if(!this.currentCity){
-      // 先获取当前城市
-      await this.getCurrentCityAction()
-      // 在用当前城市坐标请求具体地址
-      this.getDetailCity()
+  watch: {
+    currentCity(newVal){
+      // 刚进来时或者当前城市改变时重新请求
+      if(newVal){
+        // 在用当前城市坐标请求导航食品类型列表
+        this.getFoodtype(this.addressInfo.  latitude + ',' + this.addressInfo.   longitude)
+        this.getrestaurantsList()
+      }
     }
-    // 在用当前城市坐标请求导航食品类型列表
-    this.getFoodtype(this.addressInfo.latitude + ',' + this.addressInfo.longitude)
-    this.getrestaurantsList()
+  },
+  created(){
+    if(this.currentCity){
+      // 若是在别的页面刷新了页面，则列表也要重新请求
+      this.getFoodtype(this.addressInfo.  latitude + ',' + this.addressInfo.   longitude)
+        this.getrestaurantsList()
+    }
   },
   computed:{
     ...mapState('address', ['addressInfo','hotCitys','allCitys']),

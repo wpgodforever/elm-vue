@@ -11,7 +11,7 @@ const address = {
   },
 
   getters: {
-    currentCity: state => state.addressInfo.name,
+    currentCity: state => state.addressInfo.name || '',
   },
 
   mutations: {
@@ -36,6 +36,7 @@ const address = {
       return getCurrentCity({type:'guess'})
         .then( res => {
           commit('setCurrentCity', res)
+          dispatch('getDetailCity')
         })
     },
     getDetailCity({ commit, dispatch, state }, channelId) {
