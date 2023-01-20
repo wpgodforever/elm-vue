@@ -14,7 +14,8 @@ export default {
       name: 'home',
       path: '/tabbar/home',
       meta: {
-        title: '首页'
+        title: '首页',
+        keepAlive: true
       },
       component: () => import('@/pages/home')
     },

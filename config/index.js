@@ -34,6 +34,11 @@ module.exports = {
         changeOrigin: true,
         secure:false,
       },
+      '/v4': {
+        target: `http://cangdu.org:8001`,
+        changeOrigin: true,
+        secure:false,
+      },
     },
 
     // Various Dev Server settings

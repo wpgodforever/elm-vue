@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import tabbar from './tabbar/index.js'
 import login from './login/index.js'
+import store from '@/store/index.js'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,14 @@ const router = new VueRouter({
     tabbar,
     ...login,
   ]
+})
+
+// 路由导航守卫
+router.beforeEach((to,from,next) => {
+  if(!store.getters['address/currentCity']){
+    store.dispatch('address/getCurrentCityAction')
+  }
+  next()
 })
 
 export default router

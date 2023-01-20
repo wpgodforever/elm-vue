@@ -5,6 +5,7 @@
       @click-left="onClickLeft"
       @click-right="onClickRight"
       color="#fff"
+      v-bind="$attrs"
     >
     <template #right v-if="rightIcon">
       <van-icon color="#fff" :name="rightIcon" size="20" />

@@ -17,7 +17,16 @@ const getrestaurantsList = (data) => {
   })
 }
 
+const getSearchRestaurantsList = (data) => {
+  return request({
+    url: `/v4/restaurants`,
+    method: 'get',
+    params: data
+  })
+}
+
 export {
   getFoodtype,
   getrestaurantsList,
+  getSearchRestaurantsList,
 }
