@@ -9,7 +9,7 @@ const loginModule = {
   },
 
   getters: {
-
+    userName: state => state.userInfo.username || '',
   },
 
   mutations: {

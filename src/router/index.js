@@ -28,8 +28,13 @@ const router = new VueRouter({
 
 // 路由导航守卫
 router.beforeEach((to,from,next) => {
+  // 全局的定位地址，若是刷新页面，重新获取
   if(!store.getters['address/currentCity']){
     store.dispatch('address/getCurrentCityAction')
+  }
+  // 全局的用户信息，若是刷新页面，重新获取
+  if(!store.getters['login/userName'] && localStorage.getItem('elm-vue-userId')){
+    store.dispatch('login/getUserInfoAction')
   }
   next()
 })
